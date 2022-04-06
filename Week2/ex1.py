@@ -16,7 +16,7 @@ def cost_fun(x,y,theta):
 #梯度下降
 def b_dg(x,y,theta,alpha):
 	theta_num=theta.copy()
-	for time in range(1000000):
+	for time in range(100000):
 		h_num=h_fun(x@theta_num)
 		for l in range(x.shape[1]):
 			theta_num[l,0]=theta_num[l,0]-alpha*(np.multiply((h_num-y),x[:,l])).sum()/x.shape[0]
