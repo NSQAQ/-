@@ -3,14 +3,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-# J函数
-def J(t, x, y):
+# 代价函数
+def cost_fun(t, x, y):
 	num_sum = ((t.T @ x - y[:, 0]) ** 2).sum()
 	return num_sum / (2 * len(y))
 
 
 # batch 梯度下降（）
-def b_gd(theta, alpha, x, y):
+def sigmoid(theta, alpha, x, y):
 	theta_num = theta.copy()
 	times = []
 	j_num = []
@@ -19,7 +19,7 @@ def b_gd(theta, alpha, x, y):
 		theta_num[1][0] = theta[1][0] - alpha * (((theta.T @ x - y.T) * x[1]).sum()) / len(y)
 		theta=theta_num
 		times.append(time)
-		j_num.append(J(theta, x, y))
+		j_num.append(cost_fun(theta, x, y))
 	# 绘制J函数图像，检查梯度下降是否收敛
 	plt.plot(times, j_num, 'b')
 	plt.show()
@@ -49,5 +49,5 @@ y = np.array(data["profit"].values, dtype=float).reshape(97, 1)  # 构建y
 theta = np.array([[0], [0]], dtype=float)  # 构建特征变量
 alpha = 0.01  # 设置学习率
 # 测试
-theta=b_gd(theta, alpha, x, y)
+theta= sigmoid(theta, alpha, x, y)
 theta_N = normal(x, y)

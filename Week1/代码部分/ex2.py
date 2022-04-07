@@ -10,7 +10,7 @@ def Normal(x, y):
 
 
 # J函数
-def J_fun(t, X, y):
+def cost_fun(t, X, y):
 	h_fun = np.multiply((X @ t - y), (X @ t - y))
 	j_fun = h_fun.sum() / (len(X) * 2)
 	return j_fun
@@ -25,7 +25,7 @@ def b_gd(x,y,theta,alpha):
 		h_fun=x@theta_num
 		for l in range(x.shape[1]):
 			theta_num[l,0]=theta_num[l,0]-alpha*(np.multiply((h_fun-y),x[:,l])).sum()/x.shape[0]
-		j_num.append(J_fun(theta_num,x,y))
+		j_num.append(cost_fun(theta_num, x, y))
 		times.append(time)
 	theta=theta_num
 	plt.plot(times,j_num,'b')
@@ -81,5 +81,5 @@ x = np.matrix(data1[:,:3])
 y = np.matrix(data1[:,-1])
 theta = np.matrix(np.zeros((3, 1)))
 x= num_fc(x, 5)
-theta_B=b_gd(x,y,theta,0.01)
+theta_B= b_gd(x, y, theta, 0.01)
 theta_N = Normal(x, y)
