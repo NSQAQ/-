@@ -51,3 +51,4 @@ alpha = 0.01  # 设置学习率
 # 测试
 theta= sigmoid(theta, alpha, x, y)
 theta_N = normal(x, y)
+
